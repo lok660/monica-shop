@@ -1,24 +1,99 @@
-import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import './index.scss'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { View, Button, Text } from "@tarojs/components";
 
-export default class Index extends Component {
+import { add, minus, asyncAdd } from "../../actions/counter";
 
-  componentWillMount () { }
+import "./index.scss";
 
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
+export const Index = (props) => {
+  return (
+    <View className="rf-index">
+      <Button className="add_btn" onClick={props.add}>
+        +
+      </Button>
+      <Button className="dec_btn" onClick={props.dec}>
+        -
+      </Button>
+      <Button className="dec_btn" onClick={props.asyncAdd}>
+        async
+      </Button>
+      <View>
+        <Text>{props.counter.num}</Text>
       </View>
-    )
-  }
-}
+      <View>
+        <Text>Hello, World</Text>
+      </View>
+    </View>
+  );
+};
+
+const mapStateToProps = ({ counter }) => ({
+  counter,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  add() {
+    dispatch(add());
+  },
+  dec() {
+    dispatch(minus());
+  },
+  asyncAdd() {
+    dispatch(asyncAdd());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
+
+// @connect(
+//   ({ counter }) => ({
+//     counter,
+//   }),
+//   (dispatch) => ({
+//     add() {
+//       dispatch(add());
+//     },
+//     dec() {
+//       dispatch(minus());
+//     },
+//     asyncAdd() {
+//       dispatch(asyncAdd());
+//     },
+//   })
+// )
+// class Index extends Component {
+//   componentWillReceiveProps(nextProps) {
+//     console.log(this.props, nextProps);
+//   }
+
+//   componentWillUnmount() {}
+
+//   componentDidShow() {}
+
+//   componentDidHide() {}
+
+//   render() {
+//     return (
+//       <View className="rf-index">
+//         <Button className="add_btn" onClick={this.props.add}>
+//           +
+//         </Button>
+//         <Button className="dec_btn" onClick={this.props.dec}>
+//           -
+//         </Button>
+//         <Button className="dec_btn" onClick={this.props.asyncAdd}>
+//           async
+//         </Button>
+//         <View>
+//           <Text>{this.props.counter.num}</Text>
+//         </View>
+//         <View>
+//           <Text>Hello, World</Text>
+//         </View>
+//       </View>
+//     );
+//   }
+// }
+
+// export default Index;

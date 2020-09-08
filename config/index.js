@@ -1,4 +1,14 @@
+const path = require('path')
+
 const config = {
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+  },
+  sass: {
+    resource: [
+      path.resolve(__dirname, '..', 'src/common.scss')
+    ]
+  },
   projectName: 'monica-shop',
   date: '2020-9-8',
   designWidth: 750,
