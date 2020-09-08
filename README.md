@@ -1,2 +1,0 @@
-# monica-shop
-honey baby
